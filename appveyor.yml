@@ -1,3 +1,5 @@
+# version format
+version: 1.0.{build}
 # Test against this version of Node.js
 environment:
   matrix:
@@ -17,7 +19,12 @@ test_script:
   - node --version
   - npm --version
   # run tests
-  - npm test
+  - npm test -s
+
+# Including commits with particular message or from specific user
+only_commits:
+  message: /build/                # Start a new build if message contains 'build'
+  author: thiagoram@gmail.com
 
 # Don't actually build.
 build: off
