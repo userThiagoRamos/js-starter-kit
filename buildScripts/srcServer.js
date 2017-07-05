@@ -13,6 +13,14 @@ app.use(require('webpack-dev-middleware')(compiler, {
     publicPath: config.output.publicPath
 }));
 
+app.get('/books', function(req, res) {
+    res.json([
+        { title: 'One', sequence: 1, lessons: 'One' },
+        { title: 'Two', sequence: 2, lessons: 'Two' },
+        { title: 'Tow', sequence: 3, lessons: 'Three' }
+    ]);
+});
+
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, '../src/index.html'));
 });
@@ -21,6 +29,6 @@ app.listen(port, (err) => {
     if (err) {
         console.log(err);
     } else {
-        open('http://localhost:' + port, { app: 'chrome' });
+        open('http://localhost:' + port + '/books', { app: 'chrome' });
     }
 });

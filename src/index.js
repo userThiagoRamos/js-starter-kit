@@ -1,6 +1,19 @@
 import './index.css';
+import { getBooks } from './api/bookApi';
 
-import numeral from 'numeral';
+getBooks().then(result => {
 
-const courseValue = numeral(1000).format('$0,0.00');
-console.log(`I would pay ${courseValue} for this awesome course!`); //eslint-disable-line no-console
+    let booksBody = "";
+
+    result.forEach(book => {
+        booksBody += `<tr>
+      <td><a href="#" data-id="${book.sequence}" class="deleteBook">Delete</a></td>
+      <td>${book.title}</td>
+      <td>${book.sequence}</td>
+      </tr>`
+
+    });
+
+    global.document.getElementById('books').innerHTML = booksBody;
+
+});
